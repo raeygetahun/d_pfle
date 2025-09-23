@@ -61,7 +61,7 @@ const Facilities = () => {
                 <ul className="space-y-3">
                   {facility.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-trust-blue rounded-full"></div>
+                      <div className="w-2 h-2 bg-trust-green rounded-full"></div>
                       <span className="text-foreground">{feature}</span>
                     </li>
                   ))}

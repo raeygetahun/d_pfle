@@ -6,338 +6,596 @@ import { Button } from "@/components/ui/button";
 import { Quote, Award, Users, Heart, Clock, Calendar, MapPin, Star } from "lucide-react";
 import staffImage from "@/assets/healthcare-staff.jpg";
 import commonAreaImage from "@/assets/common-area.jpg";
+import hug from "@/assets/hug.jpeg";
+import hug2 from "@/assets/hug2.jpeg";
+import room from "@/assets/timothy-buck-psrloDbaZc8-unsplash.jpg"
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const AboutPage = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const heroRef = useRef(null);
+  const isHeroInView = useInView(heroRef, { once: true, margin: "-100px" });
+
+  const missionRef = useRef(null);
+  const isMissionInView = useInView(missionRef, { once: true, margin: "-50px" });
+
+  const statsRef = useRef(null);
+  const isStatsInView = useInView(statsRef, { once: true, margin: "-50px" });
+
+  const testimonialsRef = useRef(null);
+  const isTestimonialsInView = useInView(testimonialsRef, { once: true, margin: "-50px" });
+
+  const teamRef = useRef(null);
+  const isTeamInView = useInView(teamRef, { once: true, margin: "-50px" });
+
+  const ctaRef = useRef(null);
+  const isCtaInView = useInView(ctaRef, { once: true, margin: "-50px" });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
   const timeline = [
     {
       year: "1999",
-      title: "Founded",
-      description: "Comfort Haven opened its doors with a vision to provide exceptional senior care"
+      title: "Gegründet",
+      description: "Dreieich Pflege öffnete seine Türen mit der Vision, außergewöhnliche Seniorenpflege zu bieten"
     },
     {
       year: "2005",
-      title: "Expansion",
-      description: "Added memory care wing and expanded rehabilitation services"
+      title: "Erweiterung",
+      description: "Gedächtnispflege-Flügel hinzugefügt und Rehabilitationsdienste erweitert"
     },
     {
       year: "2012",
-      title: "Recognition",
-      description: "Received state certification and 5-star quality rating"
+      title: "Anerkennung",
+      description: "Staatliche Zertifizierung und 5-Sterne-Qualitätsbewertung erhalten"
     },
     {
       year: "2018",
       title: "Innovation",
-      description: "Implemented cutting-edge care technologies and family communication systems"
+      description: "Implementierung modernster Pflegetechnologien und Familienkommunikationssysteme"
     },
     {
       year: "2024",
-      title: "Excellence",
-      description: "Celebrating 25 years of compassionate care and community service"
+      title: "Exzellenz",
+      description: "25 Jahre mitfühlende Pflege und Gemeinschaftsdienst feiern"
     }
   ];
 
   const testimonials = [
     {
-      quote: "The staff at Comfort Haven treated my father like family. Their compassion and professionalism gave us peace of mind during a difficult time.",
+      quote: "Das Personal bei Dreieich Pflege behandelte meinen Vater wie Familie. Ihr Mitgefühl und ihre Professionalität gaben uns in einer schwierigen Zeit inneren Frieden.",
       author: "Jennifer Thompson",
-      role: "Daughter of Resident",
+      role: "Tochter einer Bewohnerin",
       rating: 5
     },
     {
-      quote: "I've worked in healthcare for 30 years, and I can honestly say this is the finest facility I've seen. The attention to detail is remarkable.",
+      quote: "Ich arbeite seit 30 Jahren im Gesundheitswesen und kann ehrlich sagen, dass dies die beste Einrichtung ist, die ich je gesehen habe. Die Aufmerksamkeit für Details ist bemerkenswert.",
       author: "Dr. Michael Chen",
-      role: "Family Physician",
+      role: "Familienarzt",
       rating: 5
     },
     {
-      quote: "Moving here was the best decision we made. The activities, the food, the care - everything exceeds expectations.",
+      quote: "Hierher zu ziehen war die beste Entscheidung, die wir getroffen haben. Die Aktivitäten, das Essen, die Pflege - alles übertrifft die Erwartungen.",
       author: "Robert & Mary Wilson",
-      role: "Residents",
+      role: "Bewohner",
       rating: 5
     }
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" ref={containerRef}>
       <Header />
       
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-warm-green to-warm-green/90 text-white">
-        <div className="container mx-auto px-6 text-center">
-          <div className="animate-fade-in">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Our Story of Care
+      <section 
+        // ref={heroRef}
+        // initial={{ opacity: 0, y: 50 }}
+        // animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+        // transition={{ duration: 0.8, ease: "easeOut" }}
+        className="py-20 bg-gradient-to-br from-trust-green to-trust-green/90 text-white relative overflow-hidden" 
+        style={{
+          backgroundImage: `url(${hug})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '54vh',
+        }}
+      >
+        <motion.div 
+          className="absolute inset-0 bg-trust-green/5"
+          style={{ y }}
+        ></motion.div>
+        <div className="container mx-auto px-6 text-center relative z-10 flex items-center justify-center py-20">
+          {/* <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isHeroInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          > */}
+          <div>
+            <h1 
+              className="text-5xl md:text-6xl font-bold mb-6"
+              // initial={{ opacity: 0, y: 30 }}
+              // animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
+              // transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Unsere Geschichte der Fürsorge
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-              For 25 years, Comfort Haven has been a beacon of compassionate care, 
-              creating a true home where seniors thrive with dignity and joy.
-            </p>
+            <motion.p 
+              className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.6 }}
+            >
+              Dreieich Pflege ist seit jeher ein Leuchtturm mitfühlender Pflege, 
+              der ein wahres Zuhause schafft, in dem Senioren mit Würde und Freude gedeihen.
+            </motion.p>
           </div>
         </div>
       </section>
 
       {/* Mission & Values */}
-      <section className="py-20 bg-gradient-to-b from-background to-secondary/30">
+      <motion.section 
+        ref={missionRef}
+        initial={{ opacity: 0 }}
+        animate={isMissionInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        className="py-20 bg-gradient-to-b from-background to-secondary/30"
+      >
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8 animate-fade-in">
-              <div>
+            <motion.div 
+              className="space-y-8"
+              initial={{ opacity: 0, x: -50 }}
+              animate={isMissionInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isMissionInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
                 <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-                  Our Mission & Values
+                  Unsere Mission & Werte
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  We believe that every senior deserves to live with dignity, surrounded by 
-                  care that honors their life story and supports their individual journey.
+                  Wir glauben, dass jeder Senior mit Würde leben sollte, umgeben von 
+                  Pflege, die ihre Lebensgeschichte ehrt und ihre individuelle Reise unterstützt.
                 </p>
-              </div>
+              </motion.div>
               
               <div className="space-y-6">
-                <Card className="border-border/50 hover:shadow-card transition-all duration-300 hover:-translate-y-1">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-4 mb-3">
-                      <Heart className="w-6 h-6 text-trust-blue" fill="currentColor" />
-                      <h3 className="text-xl font-semibold text-foreground">Compassion</h3>
-                    </div>
-                    <p className="text-muted-foreground">Every interaction is guided by empathy, kindness, and genuine care for our residents' wellbeing.</p>
-                  </CardContent>
-                </Card>
-                
-                <Card className="border-border/50 hover:shadow-card transition-all duration-300 hover:-translate-y-1">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-4 mb-3">
-                      <Users className="w-6 h-6 text-warm-green" />
-                      <h3 className="text-xl font-semibold text-foreground">Community</h3>
-                    </div>
-                    <p className="text-muted-foreground">We foster meaningful connections and create an environment where everyone feels they belong.</p>
-                  </CardContent>
-                </Card>
-                
-                <Card className="border-border/50 hover:shadow-card transition-all duration-300 hover:-translate-y-1">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-4 mb-3">
-                      <Award className="w-6 h-6 text-accent" />
-                      <h3 className="text-xl font-semibold text-foreground">Excellence</h3>
-                    </div>
-                    <p className="text-muted-foreground">We continuously strive for the highest standards in care, safety, and service quality.</p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-            
-            <div className="relative animate-scale-in">
-              <div className="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-trust-blue/20 to-transparent rounded-2xl"></div>
-              <img 
-                src={staffImage} 
-                alt="Healthcare staff"
-                className="relative rounded-2xl shadow-card w-full h-96 object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              25 Years of Excellence
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our journey of continuous improvement and unwavering dedication to senior care
-            </p>
-          </div>
-          
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-trust-blue to-warm-green rounded-full"></div>
-            
-            <div className="space-y-12">
-              {timeline.map((item, index) => (
-                <div 
-                  key={index} 
-                  className={`flex items-center animate-fade-in ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
-                  style={{ animationDelay: `${index * 200}ms` }}
-                >
-                  <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                    <Card className="hover:shadow-card transition-all duration-300 hover:-translate-y-1 border-border/50">
+                {[
+                  { icon: Heart, title: "Mitgefühl", description: "Jede Interaktion wird von Empathie, Freundlichkeit und echter Fürsorge für das Wohlbefinden unserer Bewohner geleitet.", color: "text-trust-green" },
+                  { icon: Users, title: "Gemeinschaft", description: "Wir fördern bedeutungsvolle Verbindungen und schaffen eine Umgebung, in der sich jeder zugehörig fühlt.", color: "text-warm-green" },
+                  { icon: Award, title: "Exzellenz", description: "Wir streben kontinuierlich nach den höchsten Standards in Pflege, Sicherheit und Servicequalität.", color: "text-accent" }
+                ].map((value, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                    animate={isMissionInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: 0.6 + (index * 0.2),
+                      ease: "easeOut"
+                    }}
+                    whileHover={{ 
+                      y: -5,
+                      scale: 1.02,
+                      transition: { duration: 0.3 }
+                    }}
+                  >
+                    <Card className="border-border/50 hover:shadow-card transition-all duration-300 hover:-translate-y-1">
                       <CardContent className="p-6">
-                        <div className="text-2xl font-bold text-trust-blue mb-2">{item.year}</div>
-                        <h3 className="text-xl font-semibold text-foreground mb-3">{item.title}</h3>
-                        <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                        <div className="flex items-center space-x-4 mb-3">
+                          <motion.div
+                            className={`w-6 h-6 ${value.color}`}
+                            whileHover={{ 
+                              scale: 1.1,
+                              rotate: 5,
+                              transition: { duration: 0.3 }
+                            }}
+                          >
+                            <value.icon className="w-6 h-6" fill="currentColor" />
+                          </motion.div>
+                          <h3 className="text-xl font-semibold text-foreground">{value.title}</h3>
+                        </div>
+                        <p className="text-muted-foreground">{value.description}</p>
                       </CardContent>
                     </Card>
-                  </div>
-                  
-                  <div className="relative z-10">
-                    <div className="w-4 h-4 bg-trust-blue rounded-full animate-pulse-soft"></div>
-                  </div>
-                  
-                  <div className="w-1/2"></div>
-                </div>
-              ))}
-            </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
+              animate={isMissionInView ? { opacity: 1, scale: 1, rotateY: 0 } : {}}
+              transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+              whileHover={{ 
+                scale: 1.05,
+                transition: { duration: 0.3 }
+              }}
+            >
+                              <motion.div 
+                  className="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-trust-green/20 to-transparent rounded-2xl"
+                  animate={{ 
+                    boxShadow: [
+                      "0 0 0 rgba(34, 197, 94, 0.2)",
+                      "0 0 20px rgba(34, 197, 94, 0.4)",
+                      "0 0 0 rgba(34, 197, 94, 0.2)"
+                    ]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                ></motion.div>
+              <img 
+                src={hug2} 
+                alt="Gesundheitspersonal"
+                className="relative rounded-2xl shadow-card w-full h-96 object-cover"
+              />
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Statistics */}
-      <section className="py-20 bg-gradient-to-r from-secondary/30 to-accent/20">
+      <motion.section 
+        ref={statsRef}
+        initial={{ opacity: 0 }}
+        animate={isStatsInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        className="py-20 bg-gradient-to-r from-secondary/30 to-accent/20"
+      >
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16 animate-fade-in">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isStatsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              By the Numbers
+              In Zahlen
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our commitment to excellence is reflected in our achievements and resident satisfaction
+              Unser Engagement für Exzellenz spiegelt sich in unseren Leistungen und der Zufriedenheit der Bewohner wider
             </p>
-          </div>
+          </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Card className="text-center border-border/50 hover:shadow-card transition-all duration-300 hover:-translate-y-2 animate-scale-in">
-              <CardContent className="p-8">
-                <div className="text-4xl font-bold text-trust-blue mb-2 animate-float">25</div>
-                <div className="text-lg font-semibold text-foreground mb-1">Years</div>
-                <div className="text-sm text-muted-foreground">of Caring Service</div>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center border-border/50 hover:shadow-card transition-all duration-300 hover:-translate-y-2 animate-scale-in delay-100">
-              <CardContent className="p-8">
-                <div className="text-4xl font-bold text-warm-green mb-2 animate-float delay-75">200+</div>
-                <div className="text-lg font-semibold text-foreground mb-1">Families</div>
-                <div className="text-sm text-muted-foreground">Served with Excellence</div>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center border-border/50 hover:shadow-card transition-all duration-300 hover:-translate-y-2 animate-scale-in delay-200">
-              <CardContent className="p-8">
-                <div className="text-4xl font-bold text-accent mb-2 animate-float delay-150">50+</div>
-                <div className="text-lg font-semibold text-foreground mb-1">Staff Members</div>
-                <div className="text-sm text-muted-foreground">Dedicated Professionals</div>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center border-border/50 hover:shadow-card transition-all duration-300 hover:-translate-y-2 animate-scale-in delay-300">
-              <CardContent className="p-8">
-                <div className="flex items-center justify-center space-x-1 text-4xl font-bold text-trust-blue mb-2">
-                  <span className="animate-float delay-300">5</span>
-                  <Star className="w-8 h-8 animate-pulse-soft" fill="currentColor" />
-                </div>
-                <div className="text-lg font-semibold text-foreground mb-1">Star Rating</div>
-                <div className="text-sm text-muted-foreground">State Certification</div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              What Families Say
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              The trust and satisfaction of our families is our greatest achievement
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card 
-                key={index} 
-                className="bg-gradient-to-br from-soft-cream to-accent/50 border-accent/20 hover:shadow-card transition-all duration-300 hover:-translate-y-2 animate-scale-in"
-                style={{ animationDelay: `${index * 150}ms` }}
+            {[
+              { number: "25", label: "Jahre", sublabel: "fürsorglicher Service", color: "text-trust-green" },
+              { number: "200+", label: "Familien", sublabel: "mit Exzellenz betreut", color: "text-warm-green" },
+              { number: "50+", label: "Mitarbeiter", sublabel: "Engagierte Fachkräfte", color: "text-accent" },
+              { number: "5", label: "Sterne Bewertung", sublabel: "Staatliche Zertifizierung", color: "text-trust-green", icon: Star }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                animate={isStatsInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: 0.4 + (index * 0.2),
+                  ease: "easeOut"
+                }}
+                whileHover={{ 
+                  y: -10,
+                  scale: 1.05,
+                  transition: { duration: 0.3 }
+                }}
               >
-                <CardContent className="p-8">
-                  <Quote className="w-8 h-8 text-trust-blue mb-4 animate-pulse-soft" />
-                  <blockquote className="text-foreground leading-relaxed mb-6">
-                    "{testimonial.quote}"
-                  </blockquote>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-semibold text-foreground">{testimonial.author}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                    </div>
-                    <div className="flex space-x-1">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-accent animate-pulse-soft" fill="currentColor" style={{ animationDelay: `${i * 100}ms` }} />
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                <Card className="text-center border-border/50 hover:shadow-card transition-all duration-300 hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <motion.div 
+                      className={`text-4xl font-bold ${stat.color} mb-2`}
+                      initial={{ scale: 0 }}
+                      animate={isStatsInView ? { scale: 1 } : {}}
+                      transition={{ duration: 0.5, delay: 0.6 + (index * 0.2) }}
+                      whileHover={{ 
+                        scale: 1.1,
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      {stat.icon ? (
+                        <div className="flex items-center justify-center space-x-1">
+                          <span>{stat.number}</span>
+                          <stat.icon className="w-8 h-8 animate-pulse-soft" fill="currentColor" />
+                        </div>
+                      ) : (
+                        stat.number
+                      )}
+                    </motion.div>
+                    <div className="text-lg font-semibold text-foreground mb-1">{stat.label}</div>
+                    <div className="text-sm text-muted-foreground">{stat.sublabel}</div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
+
+      {/* Testimonials */}
+      <motion.section 
+        ref={testimonialsRef}
+        initial={{ opacity: 0 }}
+        animate={isTestimonialsInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        className="py-20 bg-background"
+      >
+        <div className="container mx-auto px-6">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isTestimonialsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Was Familien sagen
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Das Vertrauen und die Zufriedenheit unserer Familien ist unser größter Erfolg
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                animate={isTestimonialsInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: 0.4 + (index * 0.2),
+                  ease: "easeOut"
+                }}
+                whileHover={{ 
+                  y: -10,
+                  scale: 1.02,
+                  transition: { duration: 0.3 }
+                }}
+              >
+                <Card className="bg-gradient-to-br from-soft-cream to-accent/50 border-accent/20 hover:shadow-card transition-all duration-300 hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <motion.div
+                      className="w-8 h-8 text-trust-green mb-4"
+                      animate={{ 
+                        scale: [1, 1.1, 1],
+                        rotate: [0, 5, 0]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                    >
+                      <Quote className="w-8 h-8" />
+                    </motion.div>
+                    <blockquote className="text-foreground leading-relaxed mb-6">
+                      "{testimonial.quote}"
+                    </blockquote>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-semibold text-foreground">{testimonial.author}</div>
+                        <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                      </div>
+                      <div className="flex space-x-1">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ scale: 0 }}
+                            animate={isTestimonialsInView ? { scale: 1 } : {}}
+                            transition={{ duration: 0.3, delay: 0.6 + (index * 0.2) + (i * 0.1) }}
+                            whileHover={{ 
+                              scale: 1.2,
+                              transition: { duration: 0.2 }
+                            }}
+                          >
+                            <Star className="w-4 h-4 text-accent" fill="currentColor" />
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
 
       {/* Team Photo */}
-      <section className="py-20 bg-gradient-to-b from-secondary/30 to-background">
+      <motion.section 
+        ref={teamRef}
+        initial={{ opacity: 0 }}
+        animate={isTeamInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        className="py-20 bg-gradient-to-b from-secondary/30 to-background"
+      >
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative animate-scale-in">
-              <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-br from-warm-green/20 to-transparent rounded-2xl"></div>
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, scale: 0.8, rotateY: 15 }}
+              animate={isTeamInView ? { opacity: 1, scale: 1, rotateY: 0 } : {}}
+              transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+              whileHover={{ 
+                scale: 1.05,
+                transition: { duration: 0.3 }
+              }}
+            >
+              <motion.div 
+                className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-br from-warm-green/20 to-transparent rounded-2xl"
+                animate={{ 
+                  boxShadow: [
+                    "0 0 0 rgba(34, 197, 94, 0.2)",
+                    "0 0 20px rgba(34, 197, 94, 0.4)",
+                    "0 0 0 rgba(34, 197, 94, 0.2)"
+                  ]
+                }}
+                transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+              ></motion.div>
               <img 
                 src={commonAreaImage} 
-                alt="Team and residents"
-                className="relative rounded-2xl shadow-card w-full h-96 object-cover hover:scale-105 transition-transform duration-500"
+                alt="Team und Bewohner"
+                className="relative rounded-2xl shadow-card w-full h-96 object-cover"
               />
-            </div>
+            </motion.div>
             
-            <div className="space-y-8 animate-fade-in">
-              <h2 className="text-4xl font-bold text-foreground">
-                Meet Our Care Family
-              </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Our team of dedicated professionals brings together years of experience, 
-                specialized training, and genuine passion for senior care. From our 
-                licensed nurses to our activity coordinators, every team member is 
-                committed to creating a positive, nurturing environment.
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center p-4 bg-card rounded-lg border border-border/50 hover:shadow-lg transition-all duration-300">
-                  <Clock className="w-8 h-8 text-trust-blue mx-auto mb-3" />
-                  <div className="text-2xl font-bold text-foreground">24/7</div>
-                  <div className="text-sm text-muted-foreground">Care Available</div>
-                </div>
-                <div className="text-center p-4 bg-card rounded-lg border border-border/50 hover:shadow-lg transition-all duration-300">
-                  <Calendar className="w-8 h-8 text-trust-blue mx-auto mb-3" />
-                  <div className="text-2xl font-bold text-foreground">365</div>
-                  <div className="text-sm text-muted-foreground">Days a Year</div>
-                </div>
-              </div>
-              <Button variant="caring" size="lg">
-                Meet Our Team
-              </Button>
-            </div>
+            <motion.div 
+              className="space-y-8"
+              initial={{ opacity: 0, x: 50 }}
+              animate={isTeamInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <motion.h2 
+                className="text-4xl font-bold text-foreground"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isTeamInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                Lernen Sie unsere Pflegefamilie kennen
+              </motion.h2>
+              <motion.p 
+                className="text-lg text-muted-foreground leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isTeamInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.8 }}
+              >
+                Unser Team engagierter Fachkräfte bringt jahrelange Erfahrung, 
+                spezialisierte Ausbildung und echte Leidenschaft für die Seniorenpflege zusammen. 
+                Von unseren lizenzierten Krankenschwestern bis hin zu unseren Aktivitätskoordinatoren 
+                ist jedes Teammitglied darauf bedacht, eine positive, fördernde Umgebung zu schaffen.
+              </motion.p>
+              <motion.div 
+                className="grid grid-cols-2 gap-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isTeamInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 1.0 }}
+              >
+                {[
+                  { icon: Clock, number: "24/7", label: "Pflege verfügbar" },
+                  { icon: Calendar, number: "365", label: "Tage im Jahr" }
+                ].map((stat, index) => (
+                  <motion.div 
+                    key={index}
+                    className="text-center p-4 bg-card rounded-lg border border-border/50 hover:shadow-lg transition-all duration-300"
+                    whileHover={{ 
+                      y: -5,
+                      scale: 1.05,
+                      transition: { duration: 0.3 }
+                    }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={isTeamInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.5, delay: 1.2 + (index * 0.2) }}
+                  >
+                    <motion.div 
+                      className="w-8 h-8 text-trust-green mx-auto mb-3"
+                      whileHover={{ 
+                        scale: 1.1,
+                        rotate: 5,
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <stat.icon className="w-8 h-8" />
+                    </motion.div>
+                    <motion.div 
+                      className="text-2xl font-bold text-foreground"
+                      initial={{ scale: 0 }}
+                      animate={isTeamInView ? { scale: 1 } : {}}
+                      transition={{ duration: 0.5, delay: 1.4 + (index * 0.2) }}
+                    >
+                      {stat.number}
+                    </motion.div>
+                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isTeamInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 1.4 }}
+              >
+                <Button variant="caring" size="lg">
+                  Unser Team kennenlernen
+                </Button>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-trust-blue to-trust-blue/90 text-white">
+      <motion.section 
+        ref={ctaRef}
+        initial={{ opacity: 0 }}
+        animate={isCtaInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8 }}
+        className="py-20 bg-gradient-to-r from-trust-green to-trust-green/90 text-white"
+        style={{
+          backgroundImage: `url(${room})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
         <div className="container mx-auto px-6 text-center">
-          <div className="animate-fade-in">
-            <h2 className="text-4xl font-bold mb-6">
-              Experience the Comfort Haven Difference
-            </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Visit us to see firsthand how we create a caring community where 
-              your loved one can truly thrive.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="warm" size="lg" className="text-lg px-8">
-                Schedule a Tour
-              </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 border-white text-white hover:bg-white hover:text-trust-blue">
-                Download Brochure
-              </Button>
-            </div>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <motion.h2 
+              className="text-4xl font-bold mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              Erleben Sie den Dreieich Pflege Unterschied
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-white/90 mb-8 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              Besuchen Sie uns, um aus erster Hand zu sehen, wie wir eine fürsorgliche 
+              Gemeinschaft schaffen, in der Ihr Angehöriger wirklich gedeihen kann.
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              <motion.div
+                whileHover={{ 
+                  scale: 1.05,
+                  transition: { duration: 0.3 }
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button variant="warm" size="lg" className="text-lg px-8">
+                  Rundgang vereinbaren
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ 
+                  scale: 1.05,
+                  transition: { duration: 0.3 }
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button variant="outline" size="lg" className="text-lg px-8 border-white text-white hover:bg-white hover:text-trust-green bg-white/10 backdrop-blur-sm">
+                  Broschüre herunterladen
+                </Button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       <Footer />
     </div>
