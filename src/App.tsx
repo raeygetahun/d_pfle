@@ -40,7 +40,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/d_pfle">
         <AppRoutes />
       </BrowserRouter>
     </TooltipProvider>
